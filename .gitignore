@@ -1,0 +1,3 @@
+# STATIC=1 output: for screenshots only, never committed
+cards-static/
+__pycache__/

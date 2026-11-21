@@ -1,0 +1,42 @@
+{
+  "login": "Catchme1fyoucan",
+  "name": "David",
+  "eyebrow": "@Catchme1fyoucan · Berlin",
+  "tagline": "CS master's student at TU Berlin who enjoys technical problems in any domain.",
+  "portrait": "assets/portrait.jpg",
+  "tiles": [
+    {
+      "title": "Repositories",
+      "sub": "What I have published",
+      "href": "https://github.com/Catchme1fyoucan?tab=repositories"
+    },
+    {
+      "title": "Stars",
+      "sub": "What I bookmark",
+      "href": "https://github.com/Catchme1fyoucan?tab=stars"
+    },
+    {
+      "title": "Followers",
+      "sub": "Who follows along",
+      "href": "https://github.com/Catchme1fyoucan?tab=followers"
+    }
+  ],
+  "repos": [
+    {
+      "repo": "Catchme1fyoucan/your-first-project",
+      "description": "Placeholder card. Replace this entry with a public repo and the card fills itself from GitHub at the next refresh.",
+      "language": "Python",
+      "color": "#3572A5",
+      "stars": 0,
+      "forks": 0
+    },
+    {
+      "repo": "Catchme1fyoucan/your-second-project",
+      "description": "Another placeholder. Name, description, language, stars and forks are read live once the repo exists and is public.",
+      "language": "TypeScript",
+      "color": "#3178C6",
+      "stars": 0,
+      "forks": 0
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+name: Refresh profile cards
+
+on:
+  schedule:
+    - cron: "23 4 * * *" # daily, 04:23 UTC
+  workflow_dispatch: # run it by hand after the first push
+  push:
+    paths: # re-render when the inputs change
+      - config.json
+      - scripts/**
+      - fonts/**
+      - assets/**
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cards
+  cancel-in-progress: true
+
+jobs:
+  cards:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install font tooling (provides pyftsubset)
+        run: pip install fonttools pillow
+
+      - name: Refresh contribution data
+        env:
+          # GITHUB_TOKEN sees public activity. To also count private contributions,
+          # add a classic PAT with `read:user` as the repo secret STATS_TOKEN.
+          GH_TOKEN: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
+        run: python scripts/fetch_data.py
+
+      - name: Render cards
+        run: python scripts/render_cards.py
+
+      - name: Commit cards
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data cards README.md
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
+          else
+            git commit -m "chore: refresh profile cards"
+            git push
+          fi
